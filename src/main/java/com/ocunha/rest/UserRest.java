@@ -14,8 +14,6 @@ public class UserRest {
     public Response getMsg() {
 
         String output = "Hello jow";
-
         return Response.status(200).entity(output).build();
-
     }
 }
