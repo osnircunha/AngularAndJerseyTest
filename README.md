@@ -1,2 +1,2 @@
 # AngularAndJerseyTest
-Test app using Jersey and Angular
+Test apps using Jersey and AngularJS

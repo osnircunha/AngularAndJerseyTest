@@ -1,0 +1,44 @@
+body {
+    padding-bottom: 50px;
+}
+
+footer p {
+    padding-top: 15px;
+    text-align: end;
+}
+
+.view-animate-container {
+    position:relative;
+    overflow:hidden;
+}
+
+
+.view-animate {
+    padding:10px;
+    transition-timing-function: ease;
+}
+
+.view-animate.ng-enter, .view-animate.ng-leave {
+    transition: all 2s;
+
+    display:block;
+    width:100%;
+    border-top:1px solid black;
+
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:10px;
+}
+
+.view-animate.ng-enter {
+    top:100%;
+}
+.view-animate.ng-enter.ng-enter-active {
+    top:0;
+}
+.view-animate.ng-leave.ng-leave-active {
+    top:-100%;
+}
