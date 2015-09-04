@@ -1,0 +1,18 @@
+<nav class="navbar navbar-default">
+    <div class="navbar-header">
+        <button id="menu-btn" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Expandir menu</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div id="main-menu" class="navbar-collapse collapse container">
+            <ul class="nav navbar-nav">
+                <li ng-class='{"active":page=="home"}'><a href="#home">Inicio</a></li>
+                <li ng-class='{"active":page=="customers"}'><a href="#customers">Clientes</a></li>
+                <li ng-class='{"active":page=="about"}'><a href="#about">Sobre</a></li>
+                <li ng-class='{"active":page=="contact"}'><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

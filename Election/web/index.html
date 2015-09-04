@@ -9,12 +9,15 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Angular test</title>
-    <script src="scripts/angular.min.js"></script>
-    <script src="scripts/jquery.min.js"></script>
-    <script src="scripts/bootstrap.min.js"></script>
-    <script src="scripts/angular-ui-router.min.js"></script>
-    <script src="scripts/pnotify.custom.min.js" ></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.js"></script>
+    <script src="scripts/libraries/jquery.min.js"></script>
+    <script src="scripts/libraries/angular.min.js"></script>
+    <script src="scripts/libraries/bootstrap.min.js"></script>
+    <script src="scripts/libraries/angular-ui-router.min.js"></script>
+    <script src="scripts/libraries/pnotify.custom.min.js" ></script>
+
+    <script src="scripts/directives/footer.js"></script>
+    <script src="scripts/directives/header.js"></script>
+    <script src="scripts/directives/canditate-list.js"></script>
 
     <script src="scripts/app.js"></script>
 
@@ -26,32 +29,10 @@
     </script>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="navbar-header">
-        <button id="menu-btn" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Expandir menu</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <div id="main-menu" class="navbar-collapse collapse container">
-            <ul class="nav navbar-nav">
-                <li ng-class='{"active":page=="home"}'><a href="#home">Inicio</a></li>
-                <li ng-class='{"active":page=="customers"}'><a href="#customers">Clientes</a></li>
-                <li ng-class='{"active":page=="about"}'><a href="#about">Sobre</a></li>
-                <li ng-class='{"active":page=="contact"}'><a href="#contact">Contato</a></li>
-            </ul>
-        </div>
-    </div>
-
-</nav>
+<div header-section></div>
 <div class="container view-animate-container">
     <div ui-view ></div>
 </div>
-<footer class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
-        <p class="text-muted footer">Copyright © 2015 Osnir Cunha.</p>
-    </div>
-</footer>
+<div footer-section></div>
 </body>
 </html>

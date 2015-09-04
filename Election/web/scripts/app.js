@@ -1,12 +1,9 @@
 /**
  * Created by osnircunha on 8/14/15.
  */
-(function(angular) {
-    'use strict';
+var app = angular.module('ElectionApp', ['ui.router', 'directives.footer', 'directives.header', 'directives.candidate.list']);
 
-angular.module('ElectionApp', ['ui.router', 'ngAnimate'])
-
-.controller('candidateController', function ($scope, $http) {
+app.controller('candidateController', function ($scope, $http) {
     this.name = '';
 
     this.addCandidate = function () {
@@ -27,20 +24,48 @@ angular.module('ElectionApp', ['ui.router', 'ngAnimate'])
         });
         this.name = '';
     }
-})
-.controller('homeController', function($rootScope){
+});
+app.controller('homeController', function($rootScope, $scope, $http, $stateParams){
     $rootScope.page = 'home';
-})
-.controller('customersController', function($rootScope){
+
+    $http({
+        method: 'GET',
+        url: '/rest/candidates',
+    }).then(function (resp) {
+        $scope.candidates = resp.data;
+    }, function (resp) {
+        console.log(resp);
+    });
+
+    $scope.userName = 'user ' + $stateParams.id;
+});
+app.controller('customersController', function($rootScope){
     $rootScope.page = 'customers';
-})
-.controller('contactController', function($rootScope){
+});
+app.controller('contactController', function($scope, $rootScope, $http){
     $rootScope.page = 'contact';
-})
-.controller('aboutController', function($rootScope){
+
+    angular.element('#sendForm').click(function () {
+        var req = {
+            method: 'POST',
+            url: '/rest/candidates',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: { name: 'rebeca', votes: 10 }
+        }
+
+        $http(req).then(function (resp) {
+            console.log(resp);
+        }, function (resp) {
+            console.log(resp);
+        });
+    });
+});
+app.controller('aboutController', function($rootScope){
     $rootScope.page = 'about';
-})
-.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+});
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     //
     // For any unmatched url, redirect to /state1
     $urlRouterProvider.otherwise("/home");
@@ -50,6 +75,15 @@ angular.module('ElectionApp', ['ui.router', 'ngAnimate'])
             url: "/home",
             templateUrl: "pages/home.html",
             controller: 'homeController'
+        })
+        .state('home.candidate',{
+            url: "/:id",
+            views: {
+                '@' : {
+                    template: "<h1>{{userName}}</h1>",
+                    controller: 'homeController'
+                }
+            }
         })
         .state('customers', {
             url: "/customers",
@@ -67,16 +101,5 @@ angular.module('ElectionApp', ['ui.router', 'ngAnimate'])
             controller: 'aboutController'
         });
 //        $locationProvider.html5Mode(true);
-
-});
-})(window.angular);
-
-$(document).ready(function() {
-// Hidde nav when is on mobile and onclick is performed
-    $('.navbar-nav').on('click', function () {
-        if ($('.navbar-header .navbar-toggle').css('display') != 'none') {
-            $(".navbar-header .navbar-toggle").trigger("click");
-        }
-    });
 
 });

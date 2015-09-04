@@ -1,0 +1,16 @@
+<table class="table table-hover table-striped table-bordered" ng-controller="homeController">
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Votes</td>
+        <td>link</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="c in candidates">
+        <td>{{ c.name }}</td>
+        <td>{{ c.votes }}</td>
+        <td><a ui-sref="home.candidate({id : c.id})">{{c.id}}</a> </td>
+    </tr>
+    </tbody>
+</table>
