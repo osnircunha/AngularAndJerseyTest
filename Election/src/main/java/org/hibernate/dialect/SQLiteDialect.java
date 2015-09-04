@@ -1,3 +1,14 @@
+/*
+ * The author disclaims copyright to this source code.  In place of
+ * a legal notice, here is a blessing:
+ *
+ *    May you do good and not evil.
+ *    May you find forgiveness for yourself and forgive others.
+ *    May you share freely, never taking more than you give.
+ *
+ *
+ *    https://github.com/gwenn/sqlite-dialect
+ */
 package org.hibernate.dialect;
 
 import org.hibernate.JDBCException;
@@ -11,9 +22,8 @@ import org.hibernate.type.StandardBasicTypes;
 import java.sql.SQLException;
 import java.sql.Types;
 
-/**
- * Created by osnircunha on 8/30/15.
- */
+
+
 public class SQLiteDialect extends Dialect {
     public SQLiteDialect() {
         registerColumnType(Types.BIT, "boolean");
