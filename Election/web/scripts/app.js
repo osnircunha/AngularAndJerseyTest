@@ -3,68 +3,81 @@
  */
 var app = angular.module('ElectionApp', ['ui.router', 'directives.footer', 'directives.header', 'directives.candidate.list']);
 
-app.controller('candidateController', function ($scope, $http) {
-    this.name = '';
-
-    this.addCandidate = function () {
-        var req = {
-            method: 'POST',
-            url: 'candidates/post',
-            data: {test: 'test'}
-        };
-        $http.get("/candidates/get?name=" + this.name).success(function (response) {
-            $scope.result = response;
-        });
-        this.name = '';
-    }
-
-    this.listCandidate = function () {
-        $http.get("/candidates/post?name=" + this.name).success(function (response) {
-            $scope.result = response;
-        });
-        this.name = '';
-    }
+app.factory('notification', function () {
+    return {
+        showError : function (msg) {
+            new PNotify({
+                title: 'Erro:',
+                message: msg,
+                type: 'error',
+                buttons: {
+                    sticker: false
+                }
+            })
+        },
+        showSuccess : function (msg) {
+            new PNotify({
+                title: 'Sucesso:',
+                message: msg,
+                type: 'success',
+                buttons: {
+                    sticker: false
+                }
+            })
+        }
+    };
 });
-app.controller('homeController', function($rootScope, $scope, $http, $stateParams){
+
+app.controller('homeController', ['$rootScope', '$scope', '$http', 'notification',function($rootScope, $scope, $http, notification) {
     $rootScope.page = 'home';
-
-    $http({
-        method: 'GET',
-        url: '/rest/candidates',
-    }).then(function (resp) {
-        $scope.candidates = resp.data;
-    }, function (resp) {
-        console.log(resp);
-    });
-
-    $scope.userName = 'user ' + $stateParams.id;
-});
+    $scope.saveCandidate = function () {
+        if ($scope.candidate.name && $scope.candidate.votes) {
+            var req = {
+                method: 'POST',
+                url: 'rest/candidates',
+                data: $scope.candidate
+            };
+            $http(req).then(function (resp) {
+                notification.showSuccess('Candidato salvo.');
+            }, function (resp) {
+                notification.showError('Erro ao salvar candidato.');
+            });
+        } else {
+            console.error('missing values');
+        }
+    },
+    $scope.listCandidates = function () {
+        $http({
+            method: 'GET',
+            url: '/rest/candidates',
+        }).then(function (resp) {
+            $rootScope.candidates = resp.data;
+        }, function (resp) {
+            notification.showError('Erro ao listar candidatos.');
+        });
+    },
+    $scope.getCandidate = function(id){
+        $http({
+            method: 'GET',
+            url: '/rest/candidates?id=' + id
+        }).then(function (resp) {
+            $scope.candidateDetail = resp.data;
+        }, function (resp) {
+            notification.showError('Erro ao recuperar candidato.');
+        });
+    }
+}]);
 app.controller('customersController', function($rootScope){
     $rootScope.page = 'customers';
 });
+
 app.controller('contactController', function($scope, $rootScope, $http){
     $rootScope.page = 'contact';
-
-    angular.element('#sendForm').click(function () {
-        var req = {
-            method: 'POST',
-            url: '/rest/candidates',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: { name: 'rebeca', votes: 10 }
-        }
-
-        $http(req).then(function (resp) {
-            console.log(resp);
-        }, function (resp) {
-            console.log(resp);
-        });
-    });
 });
 app.controller('aboutController', function($rootScope){
     $rootScope.page = 'about';
 });
+
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     //
     // For any unmatched url, redirect to /state1
@@ -79,9 +92,16 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         .state('home.candidate',{
             url: "/:id",
             views: {
-                '@' : {
-                    template: "<h1>{{userName}}</h1>",
-                    controller: 'homeController'
+                'bla@home' : {
+                    templateUrl: "pages/about.html",
+                }
+            }
+        })
+        .state('home.candidate.detail',{
+            url: "/detail",
+            views: {
+                'detail@home.candidate' : {
+                    template: "<h1>{{candidateDetail.name}} details here</h1>"
                 }
             }
         })

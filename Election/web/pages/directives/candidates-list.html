@@ -1,16 +1,14 @@
-<table class="table table-hover table-striped table-bordered" ng-controller="homeController">
+<table class="table table-condensed table-striped">
     <thead>
     <tr>
         <td>Name</td>
-        <td>Votes</td>
         <td>link</td>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="c in candidates">
-        <td>{{ c.name }}</td>
-        <td>{{ c.votes }}</td>
-        <td><a ui-sref="home.candidate({id : c.id})">{{c.id}}</a> </td>
+        <td>{{ c.name }} <span class="badge">{{ c.votes }}</span></td>
+        <td><a ui-sref="home.candidate({id : c.id})" ng-click="getCandidate(c.id)">details</a> </td>
     </tr>
     </tbody>
 </table>

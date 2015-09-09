@@ -30,11 +30,11 @@ public class AppConfiguration {
 
     private Properties createProperties(){
         Properties properties = new Properties();
-        properties.setProperty("show_sql", "true");
-        properties.setProperty("format_sql", "true");
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLiteDialect");
         properties.setProperty("connection.driver_class", "org.sqlite.JDBC");
-//        properties.setProperty("hibernate.hbm2ddl.auto", "update");
+//        properties.setProperty("hibernate.hbm2ddl.auto", "create");
 
         return properties;
 

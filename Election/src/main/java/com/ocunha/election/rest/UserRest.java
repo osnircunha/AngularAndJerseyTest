@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -31,10 +29,14 @@ public class UserRest {
     }
 
     @GET
-    public Response getCandidates(@QueryParam("name") String name) {
-        List<Candidate> workshops = candidateFacade.list();
-        GenericEntity<List<Candidate>> list = new GenericEntity<List<Candidate>>(workshops) {};
-        return Response.ok(list).build();
+    public Response getCandidate(@QueryParam("id") String id) {
+        if(id != null){
+            Candidate candidate = candidateFacade.findById(Long.valueOf(id));
+            return Response.ok(candidate).build();
+        } else {
+            List<Candidate> candidates = candidateFacade.list();
+            return Response.ok(candidates).build();
+        }
     }
 
     @POST

@@ -9,30 +9,30 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Angular test</title>
-    <script src="scripts/libraries/jquery.min.js"></script>
-    <script src="scripts/libraries/angular.min.js"></script>
-    <script src="scripts/libraries/bootstrap.min.js"></script>
-    <script src="scripts/libraries/angular-ui-router.min.js"></script>
-    <script src="scripts/libraries/pnotify.custom.min.js" ></script>
-
-    <script src="scripts/directives/footer.js"></script>
-    <script src="scripts/directives/header.js"></script>
-    <script src="scripts/directives/canditate-list.js"></script>
-
-    <script src="scripts/app.js"></script>
 
     <link rel="stylesheet" href="style/pnotify.custom.min.css" >
     <link rel="stylesheet" href="style/app.css" >
     <link rel="stylesheet" href="style/bootstrap.min.css">
-    <script type="text/javascript">
-        angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
-    </script>
 </head>
 <body>
 <div header-section></div>
-<div class="container view-animate-container">
+
+<div class="container panel panel-default">
     <div ui-view ></div>
 </div>
+
 <div footer-section></div>
 </body>
 </html>
+
+<script src="scripts/libraries/jquery.min.js"></script>
+<script src="scripts/libraries/angular.min.js"></script>
+<script src="scripts/libraries/bootstrap.min.js"></script>
+<script src="scripts/libraries/angular-ui-router.min.js"></script>
+<script src="scripts/libraries/pnotify.custom.min.js" ></script>
+
+<script src="scripts/directives/footer.js"></script>
+<script src="scripts/directives/header.js"></script>
+<script src="scripts/directives/canditate-list.js"></script>
+
+<script src="scripts/app.js"></script>
