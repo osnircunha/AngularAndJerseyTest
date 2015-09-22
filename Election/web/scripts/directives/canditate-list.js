@@ -2,7 +2,7 @@
  * Created by osnircunha on 9/03/15.
  */
 angular.module('directives.candidate.list', [])
-    .directive('candidateList', function () {
+    .directive('candidateList', function ($timeout) {
         return {
             templateUrl: 'pages/directives/candidates-list.html'
         };

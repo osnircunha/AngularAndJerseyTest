@@ -1,12 +1,25 @@
-<div id="home" class="panel-body" ng-controller="homeController">
-  <section title="Save">
-    <div class="form-group">
-      <input class="text-field" type="text" id="nameSave" ng-model="candidate.name" placeholder="Nome ...">
-      <input type="number" id="votes" min="0" ng-model="candidate.votes" placeholder="Votos ...">
-      <input class="btn btn-link" type="button" id="saveButton" ng-click="saveCandidate()" value="Salvar">
+<div id="home" class="panel-body" ng-controller="homeController" ng-init="showForm = false;">
+
+    <input class="btn btn-info" type="button" ng-click="showForm = !showForm;" value="{{showForm ? 'Close' : ' New'}}">
+
+    <div class="btn-group">
+        <a class="btn btn-default dropdown-toggle"
+           data-toggle="dropdown">{{showForm ? 'Close' : ' New'}}<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="open();">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+        </ul>
     </div>
-  </section>
+    <section title="Save" ng-show="showForm">
+        <div class="form-group">
+            <input class="text-field" type="text" id="nameSave" ng-model="candidate.name" placeholder="Nome ...">
+            <input type="number" id="votes" min="0" ng-model="candidate.votes" placeholder="Votos ...">
+            <input class="btn btn-link" type="button" id="saveButton" ng-click="saveCandidate()" value="Salvar">
+        </div>
+    </section>
+
 </div>
-<input class="btn btn-link" type="button" ng-click="listCandidates(); candidateDetail = null;" value="Load">
-<div ng-show="candidateDetail == null" candidate-list></div>
-<div ng-show="candidateDetail != null" ui-view="bla"></div>
+<div candidate-list></div>
