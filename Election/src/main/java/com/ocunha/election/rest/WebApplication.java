@@ -11,6 +11,4 @@ public class WebApplication extends ResourceConfig {
         packages("com.ocunha.election.rest");
     }
 
-
-
 }

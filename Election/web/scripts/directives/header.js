@@ -4,6 +4,7 @@
 angular.module('directives.header', [])
     .directive('headerSection', function () {
         return {
+            controller: 'loginController',
             templateUrl: 'pages/directives/header.html'
         };
     });

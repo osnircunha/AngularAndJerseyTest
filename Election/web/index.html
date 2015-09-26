@@ -20,10 +20,12 @@
 
     <script src="scripts/directives/footer.js"></script>
     <script src="scripts/directives/header.js"></script>
-    <script src="scripts/directives/canditate-list.js"></script>
     <script src="scripts/directives/loading.js"></script>
 
     <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/candidate.js" ></script>
+    <script src="scripts/controllers/position.js" ></script>
+    <script src="scripts/controllers/login.js" ></script>
 
     <link rel="stylesheet" href="style/pnotify.custom.min.css" >
     <link rel="stylesheet" href="style/app.css" >
@@ -31,7 +33,9 @@
 </head>
 <body>
     <div header-section></div>
+
     <loading-view></loading-view>
+
     <div class="container panel panel-default">
         <div ui-view ></div>
     </div>

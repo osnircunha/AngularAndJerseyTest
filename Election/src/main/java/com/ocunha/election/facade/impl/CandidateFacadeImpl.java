@@ -1,19 +1,24 @@
-package com.ocunha.election;
+package com.ocunha.election.facade.impl;
 
-import com.ocunha.election.dao.impl.CandidateDao;
+import com.ocunha.election.dao.CandidateDao;
+import com.ocunha.election.dao.Dao;
+import com.ocunha.election.facade.CandidateFacade;
+import com.ocunha.election.facade.Facade;
 import com.ocunha.election.object.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by osnircunha on 8/30/15.
  */
-@Component
-public class CandidateFacade {
+@Service("candidateFacade")
+public class CandidateFacadeImpl implements CandidateFacade{
 
     @Autowired
+    @Qualifier("candidateDao")
     private CandidateDao candidateDao;
 
     public void save(Candidate candidate) {
@@ -24,8 +29,8 @@ public class CandidateFacade {
         candidateDao.update(candidate);
     }
 
-    public void delete(Candidate candidate) {
-        candidateDao.delete(candidate);
+    public void delete(Long id) {
+        candidateDao.delete(id);
     }
 
     public Candidate findById(Long id) {
@@ -36,8 +41,5 @@ public class CandidateFacade {
         return candidateDao.list();
     }
 
-    public void setCandidateDao(CandidateDao candidateDao) {
-        this.candidateDao = candidateDao;
-    }
 }
 

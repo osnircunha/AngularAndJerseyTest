@@ -12,9 +12,18 @@
         <div id="main-menu" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li ng-class='{"active":page=="welcome"}'><a ui-sref="welcome">Inicio</a></li>
-                <li ng-class='{"active":page=="home"}'><a ui-sref="home">Candidatos</a></li>
-                <li style="padding-top: 15px; padding-bottom: 15px;" ng-show="loggedUser != null"><span class="glyphicon glyphicon-user"></span> 
-                    <span >Olá <strong>{{loggedUser.username}}</strong></span></li>
+                <li ng-class='{"active":page=="candidate"}'><a ui-sref="candidate">Candidatos</a></li>
+                <!--<li ng-class='{"active":page=="position"}'><a ui-sref="position">Cargos</a></li>-->
+                <li class="dropdown" ng-show="currentUser != null">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        Olá <strong>{{currentUser.username}}</strong><span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" ng-click="logout();">Logout</a></li>
+                    </ul>
+                </li>
+
+
             </ul>
         </div>
     </div>

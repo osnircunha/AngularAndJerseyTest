@@ -1,0 +1,45 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="no();"><span>&times;</span></button>
+    <div ng-switch="action">
+        <h4 class="modal-title" ng-switch-when="save" >Novo Candidato</h4>
+        <h4 class="modal-title" ng-switch-when="update" >Atualizar Candidato</h4>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="pf-form pform_custom" ng-class="{'has-error' : incomplete}">
+        <div class="row">
+            <div class="col-lg-12">
+                <alert ng-show="incomplete" type="danger">Invalid credentials!</alert>
+            </div>
+        </div>
+        <div class="row" ng-show="candidate.id">
+            <div class="col-lg-4">
+                <span>Id</span>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" disabled="true" class="form-control" value="{{candidate.id}}" >
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <span>Nome</span>
+            </div>
+            <div class="col-lg-8">
+                <input class="form-control" type="text" ng-model="candidate.name" >
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <span>Votos</span>
+            </div>
+            <div class="col-lg-8">
+                <input type="number" class="form-control" min="0" ng-model="candidate.votes" >
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button ng-show="action == 'save'" type="button" ng-click="salvar(candidate);" class="btn btn-primary">Salvar</button>
+    <button ng-show="action == 'update'" type="button" ng-click="atualizar(candidate);" class="btn btn-primary">Atualizar</button>
+    <button type="button" ng-click="no();" class="btn btn-default">Cancelar</button>
+</div>

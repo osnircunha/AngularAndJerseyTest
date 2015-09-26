@@ -3,7 +3,6 @@ package com.ocunha.election;
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -12,7 +11,6 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.sqlite.SQLiteDataSource;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -26,12 +24,12 @@ import java.util.Properties;
 public class AppConfiguration {
 
     @Autowired
-    Environment env;
+    private Environment env;
 
     private Properties createProperties(){
         Properties properties = new Properties();
-        properties.setProperty("hibernate.show_sql", "true");
-        properties.setProperty("hibernate.format_sql", "true");
+        //properties.setProperty("hibernate.show_sql", "true");
+        //properties.setProperty("hibernate.format_sql", "true");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLiteDialect");
         properties.setProperty("connection.driver_class", "org.sqlite.JDBC");
 //        properties.setProperty("hibernate.hbm2ddl.auto", "create");

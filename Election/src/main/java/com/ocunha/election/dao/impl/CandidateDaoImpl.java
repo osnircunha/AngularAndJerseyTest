@@ -1,5 +1,6 @@
 package com.ocunha.election.dao.impl;
 
+import com.ocunha.election.dao.CandidateDao;
 import com.ocunha.election.dao.Dao;
 import com.ocunha.election.dao.HibernateElectionDaoSupport;
 import com.ocunha.election.object.Candidate;
@@ -11,19 +12,20 @@ import java.util.List;
 /**
  * Created by osnircunha on 8/30/15.
  */
-@Component
-public class CandidateDao extends HibernateElectionDaoSupport implements Dao<Candidate> {
+@Repository("candidateDao")
+public class CandidateDaoImpl extends HibernateElectionDaoSupport implements CandidateDao {
 
     public void save(Candidate candidate) {
         getSession().save(candidate);
     }
 
     public void update(Candidate candidate) {
-        getSession().update(candidate);
+        getSession().merge(candidate);
     }
 
-    public void delete(Candidate candidate) {
-        getSession().delete(candidate);
+    public void delete(Long id) {
+        getSession().delete(getSession().get(Candidate.class, id));
+        getSession().flush();
     }
 
     public Candidate findById(Long id) {
@@ -31,6 +33,6 @@ public class CandidateDao extends HibernateElectionDaoSupport implements Dao<Can
     }
 
     public List<Candidate> list() {
-        return getSession().createQuery("from Candidate c").list();
+        return getSession().createCriteria(Candidate.class).list();
     }
 }

@@ -1,29 +1,31 @@
 package com.ocunha.election.rest;
 
+import com.ocunha.election.facade.UserFacade;
 import com.ocunha.election.object.User;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
  * Created by osnircunha on 9/21/15.
  */
+@Controller
 @Path("/login")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class LoginRest {
 
-    @POST
-    public Response authenticate(User user){
+    @Autowired
+    private UserFacade userFacade;
 
-        if(user.getPassword().equals("123")) {
-            user.setPassword("***");
-            return Response.ok(user).build();
+    @POST
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response authenticate(@FormParam("username") String username, @FormParam("credential") String credential){
+        User user = userFacade.findByName(username);
+        if(user.getPassword().equals(credential)) {
+            return Response.status(Response.Status.OK).build();
         } else {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
