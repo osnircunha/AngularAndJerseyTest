@@ -40,6 +40,6 @@ public class Logging {
 
     private void printMethodExecution(String method, long time){
         String sTime = new SimpleDateFormat(FORMAT).format(new Date(time));
-        LOGGER.debug(String.format("Intercepting %s - time to execute : %s", method, sTime));
+        LOGGER.debug("Intercepting {} - time to execute : {}", method, sTime);
     }
 }

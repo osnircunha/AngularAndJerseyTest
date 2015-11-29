@@ -44,11 +44,3 @@ footer p {
     50% 50%
     no-repeat;
 }
-
-ul.nav li.dropdown:hover ul.dropdown-menu{
-    display: block !important;
-}
-
-a.menu:after, .dropdown-toggle:after {
-    content: none !important;
-}

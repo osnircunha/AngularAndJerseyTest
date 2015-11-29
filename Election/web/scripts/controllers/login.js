@@ -13,7 +13,8 @@ app.controller('loginController', function ($scope, $rootScope, notification, $h
             var req = {
                 method: 'POST',
                 url: 'rest/login',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded',
+                          'X-SAML': 'SAMLRequest:IwPnJynT6rioPQRuoOq2vj+lEM/xvDy+ZXkRR7dxGlk='},
                 data: 'username=' + $scope.username + '&credential=' + btoa($scope.username + ':' + $scope.password)
             };
             $http(req).then(function (resp) {
@@ -33,5 +34,12 @@ app.controller('loginController', function ($scope, $rootScope, notification, $h
         delete $rootScope.currentUser;
         $state.go('welcome');
     }
+
+    //var loggedButton = angular.element('#logged-user');
+    angular.element('ul.nav li.dropdown').hover(function() {
+        angular.element(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function() {
+        angular.element(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(200);
+    });
 
 });

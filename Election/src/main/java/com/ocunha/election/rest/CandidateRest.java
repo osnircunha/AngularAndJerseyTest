@@ -1,7 +1,7 @@
 package com.ocunha.election.rest;
 
+import com.ocunha.election.annotation.Filter;
 import com.ocunha.election.facade.CandidateFacade;
-import com.ocunha.election.facade.impl.CandidateFacadeImpl;
 import com.ocunha.election.object.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,14 +24,17 @@ public class CandidateRest {
     private CandidateFacade candidateFacadeImpl;
 
     @GET
-    public Response getCandidate(@QueryParam("id") String id) {
-        if(id != null && !"".equals(id)){
-            Candidate candidate = candidateFacadeImpl.findById(Long.valueOf(id));
-            return Response.ok(candidate).build();
-        } else {
-            List<Candidate> candidates = candidateFacadeImpl.list();
-            return Response.ok(candidates).build();
-        }
+    @Path("/{id}")
+    @Filter
+    public Response getCandidate(@PathParam("id") String id) {
+        Candidate candidate = candidateFacadeImpl.findById(Long.valueOf(id));
+        return Response.ok(candidate).build();
+    }
+
+    @GET
+    public Response getCandidates() {
+        List<Candidate> candidates = candidateFacadeImpl.list();
+        return Response.ok(candidates).build();
     }
 
     @POST

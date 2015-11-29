@@ -1,10 +1,8 @@
 package com.ocunha.election.dao.impl;
 
 import com.ocunha.election.dao.CandidateDao;
-import com.ocunha.election.dao.Dao;
 import com.ocunha.election.dao.HibernateElectionDaoSupport;
 import com.ocunha.election.object.Candidate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

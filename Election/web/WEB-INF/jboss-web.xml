@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>/election</context-root>
+</jboss-web>

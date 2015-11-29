@@ -1,9 +1,7 @@
 package com.ocunha.election.facade.impl;
 
 import com.ocunha.election.dao.CandidateDao;
-import com.ocunha.election.dao.Dao;
 import com.ocunha.election.facade.CandidateFacade;
-import com.ocunha.election.facade.Facade;
 import com.ocunha.election.object.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
